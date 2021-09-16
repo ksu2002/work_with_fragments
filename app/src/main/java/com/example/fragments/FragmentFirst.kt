@@ -37,20 +37,14 @@ class FragmentFirst : Fragment() {
 
     private fun openSecondFragment() {
         val editText = view?.findViewById<EditText>(R.id.edit_text)
-
-//        val intent = Intent(
-//            activity!!.baseContext,
-//            TargetActivity::class.java
-//        )
-//        intent.putExtra("message", KEY)
-//        activity!!.startActivity(intent)
-//
-             activity?.intent?.putExtra(KEY, editText?.getText().toString())
+        val fragment = FragmentSecond()
+        val bundle = Bundle()
+        bundle.putString(KEY,editText?.getText().toString())
+        fragment.arguments = bundle
         val transaction = activity?.supportFragmentManager?.beginTransaction()
-        transaction?.replace(R.id.fragment_container_view, FragmentSecond())
+        transaction?.replace(R.id.fragment_container_view, fragment)
         transaction?.commit()
     }
-
     companion object {
         const val KEY = "key"
     }
